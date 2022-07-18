@@ -44,6 +44,7 @@ async function run() {
         })
 
         // get single event
+        // -----------------
         // app.get('/event/:eventId', async (req, res) => {
         //     const id = req.params.eventId
         //     console.log(id)
