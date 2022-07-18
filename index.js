@@ -6,8 +6,9 @@ require('dotenv').config()
 const port = process.env.PORT || 5000
 
 
+
 // middlewhare
-app.use(cors())
+app.use(cors({ origin : "https://enigmatic-fjord-72408.herokuapp.com/" }))
 app.use(express.json())
 
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.ah0b9.mongodb.net/?retryWrites=true&w=majority`;
@@ -44,13 +45,13 @@ async function run() {
         })
 
         // get single event
-        app.get('/event/:eventId', async (req, res) => {
-            const id = req.params.eventId
-            console.log(id)
-            const query = { _id: ObjectId(id) }
-            const result = await eventCollection.findOne(query)
-            res.send(result)
-        })
+        // app.get('/event/:eventId', async (req, res) => {
+        //     const id = req.params.eventId
+        //     console.log(id)
+        //     const query = { _id: ObjectId(id) }
+        //     const result = await eventCollection.findOne(query)
+        //     res.send(result)
+        // })
 
 
     } finally {
