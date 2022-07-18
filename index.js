@@ -44,14 +44,13 @@ async function run() {
         })
 
         // get single event
-        // -----------------
-        // app.get('/event/:eventId', async (req, res) => {
-        //     const id = req.params.eventId
-        //     console.log(id)
-        //     const query = { _id: ObjectId(id) }
-        //     const result = await eventCollection.findOne(query)
-        //     res.send.json(result)
-        // })
+        app.get('/event/:eventId', async (req, res) => {
+            const id = req.params.eventId
+            console.log(id)
+            const query = { _id: ObjectId(id) }
+            const result = await eventCollection.findOne(query)
+            res.send(result)
+        })
 
 
     } finally {
