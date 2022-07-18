@@ -8,8 +8,24 @@ const port = process.env.PORT || 5000
 
 
 // middlewhare
-app.use(cors({ origin : "https://enigmatic-fjord-72408.herokuapp.com/" }))
+// app.use(cors({ origin : "https://enigmatic-fjord-72408.herokuapp.com/" }))
+
+const corsConfig = {
+    origin: '*',
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE']
+}
+app.use(cors(corsConfig))
+app.options("*", cors(corsConfig))
 app.use(express.json())
+app.use(function (req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*")
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept,authorization")
+    next()
+})
+
+// app.use(cors({origin:"http://localhost:3000"}))
+// app.use(express.json())
 
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.ah0b9.mongodb.net/?retryWrites=true&w=majority`;
 
@@ -45,13 +61,13 @@ async function run() {
         })
 
         // get single event
-        // app.get('/event/:eventId', async (req, res) => {
-        //     const id = req.params.eventId
-        //     console.log(id)
-        //     const query = { _id: ObjectId(id) }
-        //     const result = await eventCollection.findOne(query)
-        //     res.send(result)
-        // })
+        app.get('/event/:eventId', async (req, res) => {
+            const id = req.params.eventId
+            console.log(id)
+            const query = { _id: ObjectId(id) }
+            const result = await eventCollection.findOne(query)
+            res.send(result)
+        })
 
 
     } finally {
